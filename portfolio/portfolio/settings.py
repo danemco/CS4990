@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'casestudy',
+    'sorl.thumbnail',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -105,3 +106,5 @@ STATIC_URL = '/static/'
 # Adding Media
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+THUMBNAIL_DEBUG = True
