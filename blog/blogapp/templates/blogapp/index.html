@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block 'title' %}Most Recent Blog Posts{% endblock 'title' %}
+
+
+{% block 'content' %}
+<h1>Most Recent Blog Posts</h1>
+
+{% if post_list %}
+   
+   {% for post in post_list %}
+
+
+        {% include 'blogapp/_post.html' %}
+
+
+        <a href="{% url 'blogapp:detail' post.id %}#comment-section">Leave a comment...</a>
+
+        {% if not forloop.last %}
+            <hr>
+        {% endif %}
+
+   {% endfor %}
+
+   
+{% else %}
+    <p>Sorry folks. No posts to show.</p>
+
+{% endif %}
+
+{% endblock 'content' %}
+
+
