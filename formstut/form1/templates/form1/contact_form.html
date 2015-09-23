@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block 'title' %}Contact Us{% endblock %}
+
+{% block 'content' %}
+    <h1>Contact Us Today</h1>
+
+    <form action="{% url 'form1:contactform' %}" method='post'>
+    {% csrf_token %}
+    <table class="table">
+    {{ form }}
+    <tr>
+        <td colspan="2"><input type="submit" value="Send message"></td>
+    </tr>
+    </table>
+    </form>
+
+{% endblock %}
