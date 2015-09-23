@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block 'title' %}Song Deleted{% endblock %}
+
+{% block 'content' %}
+<h1>Song deleted</h1>
+
+<p>That song was successfully deleted. <a href="{% url 'form3:songlist' %}">Go back to the list of songs.</a></p>
+{% endblock %}

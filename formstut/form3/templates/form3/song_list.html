@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block 'title' %}List of songs{% endblock %}
+
+{% block 'content' %}
+<h1>List of Songs</h1>
+
+{% for song in song_list %}
+
+   <h2>{{ song.title }}</h2>
+   <p>by {{ song.musician }}. Genre: {{ song.get_genre_display }}.</p>
+   <p><a href="{% url 'form3:songupdate' song.id %}">Update</a> | <a href="{% url 'form3:deletesong' song.id %}">Delete</a></p>
+
+   {% if not forloop.last %}
+      <hr>
+   {% endif %}
+
+
+{% empty %}
+<p>Sorry, no songs are available.</p>
+
+{% endfor %}
+
+<hr>
+<a href="{% url 'form3:addsong' %}">Add A New Song</a>
+
+{% endblock %}

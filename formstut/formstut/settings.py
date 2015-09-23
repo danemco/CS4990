@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'form1',
     'form2',
+    'form3',
 )
 
 MIDDLEWARE_CLASSES = (
