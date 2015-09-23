@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block 'title' %}List of books{% endblock %}
+
+{% block 'content' %}
+<h1>List of books</h1>
+
+{% for book in book_list %}
+
+   <h2>{{ book.title }}</h2>
+   by {{ book.author }}, {{ book.pages }} page{{ book.pages|pluralize }}.
+
+   {% if not forloop.last %}
+      <hr>
+   {% endif %}
+
+
+{% empty %}
+<p>Sorry, no books are available.</p>
+
+{% endfor %}
+
+<hr>
+<a href="{% url 'form2:addbook' %}">Add A New Book</a>
+
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block 'title' %}Thank you{% endblock %}
+
+{% block 'content' %}
+<h1>Book saved</h1>
+
+<p>Thank you for adding that book. <a href="{% url 'form2:booklist' %}">Go back to the list of books.</a></p>
+{% endblock %}
