@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block 'title' %}{{ category.category_name}}{% endblock 'title' %}
+
+
+{% block 'content' %}
+
+    <!-- show all posts that belong to this category -->
+    {% for post in category.post_set.all %}
+        {% include 'blogapp/_post.html' %}
+    {% endfor %}
+
+{% endblock 'content' %}
+
+

@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
+from django.core.urlresolvers import reverse_lazy
 
 from .models import Post, Comment, Category
+from .forms import CommentForm
 
 class IndexView(generic.ListView):
     template_name = 'blogapp/index.html'
@@ -15,69 +17,25 @@ class IndexView(generic.ListView):
 class PostDetailView(generic.DetailView):
     model = Post
 
-#     def get_context_data(self, *args, **kwargs):
-#         context = super(PostDetailView,self).get_context_data()
-#         context.update({"comment_list": self.get_object().comment_set.all()})
-#        # context.update({"comment_list": Comment.objects.filter(post__pk = self.kwargs.get('pk'))})
-#         return context;
+    def get_context_data(self, *args, **kwargs):
+        context = super(PostDetailView,self).get_context_data()
+        context["form"] = CommentForm(initial={'post_id': self.object.pk})
+        return context;
 
+class PostCommentFormView(generic.detail.SingleObjectMixin, generic.FormView):
+    form_class = CommentForm
+    model = Post
+    success_url = reverse_lazy('blogapp:comment_success')
+
+    def form_valid(self, form):
+        
+        comment = Comment()
+        comment.post = get_object_or_404(Post, pk=form.cleaned_data["post_id"])
+        comment.person = form.cleaned_data["name"]
+        comment.comment_text = form.cleaned_data["comment"]
+        comment.save()
+        return super(PostCommentFormView, self).form_valid(form)
+    
 class CategoryDetailView(generic.DetailView):
     model = Category
     # query set
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# # Create your views here.
-# class PostDetail(DetailView):
-#     model = Post
-# 
-#     def get_context_data(self):
-#         context = super(PostDetail,self).get_context_data()
-#         context.update({"form": CommentForm()})
-#         return context;
