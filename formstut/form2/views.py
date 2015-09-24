@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, FormView # generic view for forms
 from django.core.urlresolvers import reverse_lazy # helps us resolve URLs based on urls.py
-from django.core.mail import send_mail # helper function for senidng email via Django
 
 from .forms import BookForm # our form
 from .models import Book
@@ -10,6 +9,12 @@ from .models import Book
 
 class BookListView(ListView):
     model = Book
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(BookListView, self).get_context_data(**kwargs)
+        context["form"] = BookForm
+        return context
+        
 
 class AddBookView(FormView):
     form_class = BookForm

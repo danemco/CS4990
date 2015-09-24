@@ -5,7 +5,7 @@
 {% block 'content' %}
     <h1>Contact Us Today</h1>
 
-    <form action="{% url 'form1:contactform' %}" method='post'>
+    <form action="." method='post'>
     {% csrf_token %}
     <table class="table">
     {{ form }}

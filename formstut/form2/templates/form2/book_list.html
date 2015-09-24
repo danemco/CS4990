@@ -21,6 +21,18 @@
 {% endfor %}
 
 <hr>
+<form action="{% url 'form2:addbook' %}" method="post">
+{% csrf_token %}
+<table class="table">
+{{ form }}
+<tr>
+<td colspan="2">
+    <button class="button btn">Add this book to my reading list.</button>
+</td>
+</tr>
+</table>
+</form>
+<hr>
 <a href="{% url 'form2:addbook' %}">Add A New Book</a>
 
 {% endblock %}

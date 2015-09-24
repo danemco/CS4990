@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-{% block 'title' %}Add Song{% endblock %}
+{% block 'title' %}{% if song %}Update{% else %}Add{% endif %} Song{% endblock %}
 
 {% block 'content' %}
-    <h1>Add A New Song</h1>
+    <h1>{% if song %}Update{% else %}Add{% endif %} A Song</h1>
 
     <form action="." method='post'>
     {% csrf_token %}

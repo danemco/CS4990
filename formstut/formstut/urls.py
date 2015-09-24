@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'^form1/', include('form1.urls', namespace='form1')),
     url(r'^form2/', include('form2.urls', namespace='form2')),
     url(r'^form3/', include('form3.urls', namespace='form3')),
+    url(r'^inventory/', include('inventory.urls', namespace='inventory')),
     url(r'^admin/', include(admin.site.urls)),
 ]
