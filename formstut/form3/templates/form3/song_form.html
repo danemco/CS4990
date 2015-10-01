@@ -2,10 +2,47 @@
 
 {% block 'title' %}{% if song %}Update{% else %}Add{% endif %} Song{% endblock %}
 
+{% block 'extrascripts' %}
+<script>
+
+// $(function () {
+$(document).ready(function () {
+
+ $('#songform').submit(
+    function (event) {
+
+        event.preventDefault();
+
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'post',
+            data: $(this).serialize(),
+            success: function (data) {
+                    $('#status').text('Successfully updated ' + data.title).show().fadeOut(5000);
+                    
+                    console.log(data);
+                },
+            error: function (xd4, statusText, errorText) {
+                    $('#status').text('Uh oh. Something didn\'t go right.');
+                    console.log("error was " + statusText + " and error text was " + errorText);
+                },
+        });
+    });
+});
+
+</script>
+
+
+{% endblock %}
+
 {% block 'content' %}
     <h1>{% if song %}Update{% else %}Add{% endif %} A Song</h1>
 
-    <form action="." method='post'>
+    <div id="status" class="alert alert-success" style="display: none;" role="alert"></div>
+
+    <div id="result">
+    </div>
+    <form action="." method='post' id="songform">
     {% csrf_token %}
     <table class="table">
     {{ form }}
