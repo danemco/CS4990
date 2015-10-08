@@ -28,6 +28,20 @@ $(document).ready(function () {
                 },
         });
     });
+
+    $("#increment").click(
+    function (event) {
+        form = $(this).parents("form");
+        form.find("#id_musician").val(Number(form.find("#id_musician").val()) + 1);
+        form.submit();
+    });
+
+    $("#decrement").click(
+    function (event) {
+        form = $(this).parents("form");
+        form.find("#id_musician").val(Number(form.find("#id_musician").val()) - 1);
+        form.submit();
+    });
 });
 
 </script>
@@ -47,7 +61,11 @@ $(document).ready(function () {
     <table class="table">
     {{ form }}
     <tr>
-        <td colspan="2"><input type="submit" value="{% if song %}Update{% else %}Add{%endif%} Song"></td>
+        <td><input type="submit" value="{% if song %}Update{% else %}Add{%endif%} Song"></td>
+        <td><button id="increment" class="btn btn-default"> + </button>  
+            <button id="decrement" class="btn btn-default"> - </button>  </td>
+
+        
     </tr>
     </table>
     </form>
