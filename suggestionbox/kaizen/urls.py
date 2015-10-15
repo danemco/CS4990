@@ -4,5 +4,7 @@ from . import views
 
 urlpatterns = [
    url(r'^$', login_required(views.IdeaListView.as_view()), name="idealist"),
+   url(r'^(?P<pk>[0-9]+)/status/$', views.ChangeStatusView.as_view(), name="changestatus"),
+   url(r'new-idea/$', views.CreateIdeaView.as_view(), name="createidea"),
    url(r'^secrets/$', login_required(views.SecretView.as_view()), name="secret"),
 ]

@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
-{% block 'title' %}List of Kaizens{% endblock %}
+{% block content %}List of Kaizens{% endblock %}
 
-{% block 'content' %}
+{% block content %}
     <h1>List of User-submitted Kaizens</h1>
 
     {% for idea in idea_list %}
@@ -19,7 +19,16 @@
         </tr>
         <tr>
             <td>Status</td>
-            <td>{{ idea.get_status_display }}</td>
+            <td>
+               {% if request.user.is_superuser %} 
+                   <a href="{% url 'kaizen:changestatus' idea.id %}">
+                       {{ idea.get_status_display }} - change
+                   </a>
+               {% else %}
+                   {{ idea.get_status_display }}
+               {% endif %}
+            
+            </td>
         </tr>
         </table>
         </div>
