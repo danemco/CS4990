@@ -59,9 +59,12 @@
             <li class="active"><a href="/">Home</a></li>
             <li>
                 {% if request.user.is_authenticated %}
-                    <a href="/accounts/signout/">Log Out</a>
+                    <a href="/accounts/logout/">Log Out</a>
                 {% else %}
-                    <a href="/accounts/signin/">Log In</a>
+                    <a href="/accounts/login/">Log In</a>
+                    </li>
+                    <li>
+                    <a href="/accounts/register/">Create Account</a>
                 {% endif %}    
             </li>
             <li><a href="/admin/">Admin</a></li>
