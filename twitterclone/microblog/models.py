@@ -4,6 +4,7 @@ import re
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 class Profile(models.Model):
     user = models.ForeignKey(User)
@@ -23,6 +24,9 @@ class Post(models.Model):
     profile = models.ForeignKey(Profile)
     body    = models.CharField(max_length=140)
     pub_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-pub_date',)
 
     def body_with_links(self):
         # got this nice bit of code from http://stackoverflow.com/questions/17568168/python-regex-to-replace-urls-in-text-with-links-conversion-from-php

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
-{% block title %}@{{ profile.username }}'s Profile{% endblock %}
+{% block title %}@{{ profile.user.username }}'s Profile{% endblock %}
 
 {% block content %}
 <h1>@{{ profile.user.username }}'s Profile</h1>
@@ -13,6 +13,16 @@
     {% else %}
         <img src="{{ profile.get_gravatar_img_path }}?s=160" width="160" height="160" class="profilepic">
     {% endif %}
+    {% if request.user.is_authenticated %}
+    <div class="btn followbutton">
+        <form action="{% url 'microblog:follow' profile.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Follow @{{ profile.user.username }}</button>
+        </form>
+    </div>
+    {% endif %}
+
+
     <div class="bio">
         <p>
         {{ profile.bio }}
@@ -33,7 +43,7 @@
 <hr>
 <div class="recentposts">
 <h3>Last 10 posts</h3>
-{% for post in profile.post_set.all %}
+{% for post in profile.post_set.all|slice:":10" %}
 
     {% include 'microblog/_post.html' %}
     {% if not forloop.last %}
