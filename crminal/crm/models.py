@@ -62,7 +62,7 @@ class Opportunity(models.Model):
     contact = models.ForeignKey(Contact)
     value = models.FloatField(help_text='How much this opportunity is worth to the organization')
     source = models.ForeignKey(Campaign, help_text='How did this contact find out about us?')
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, help_text='The user that is assigned to this opportunity')
     create_date = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
@@ -76,7 +76,7 @@ class Opportunity(models.Model):
 
 class Reminder(models.Model):
     opportunity = models.ForeignKey(Opportunity)
-    date = models.DateField()
+    date = models.DateField(help_text="due date")
     note = models.CharField(max_length = 200)
     completed = models.BooleanField(default=False)
 
