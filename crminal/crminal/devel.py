@@ -38,7 +38,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'django.contrib.humanize',
     'debug_toolbar',
     'sorl.thumbnail',
     'registration',
@@ -83,11 +82,8 @@ WSGI_APPLICATION = 'crminal.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'crminal',
-        'USER': 'crminal',
-        'PASSWORD': 'adfljfakflskdjadfsj3j232',
-        'HOST': 'localhost',
+        'ENGINE': 'django.db.backends.sqlite',
+        'NAME': 'db.sqlite3',
     }
 }
 

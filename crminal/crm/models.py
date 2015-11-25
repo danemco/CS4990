@@ -12,6 +12,9 @@ class Stage(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        ordering = ['order']
+
 
 class Company(models.Model):
     name = models.CharField(max_length = 200)
@@ -67,9 +70,9 @@ class Opportunity(models.Model):
 
     def __unicode__(self):
         if self.company:
-            return self.company
+            return str(self.company)
         else:
-            return self.contact
+            return unicode(self.contact)
 
     class Meta:
         verbose_name_plural = 'opportunities'
@@ -81,7 +84,7 @@ class Reminder(models.Model):
     completed = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return self.opportunity + ": " + self.note
+        return self.opportunity + u": " + self.note
 
 class Report(models.Model):
     name = models.CharField(max_length = 200)
