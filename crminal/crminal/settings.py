@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.humanize',
+    'crispy_forms',
     'debug_toolbar',
     'sorl.thumbnail',
     'registration',
@@ -114,3 +115,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 SITE_ID = 1
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import DetailView, TemplateView
 from django.db.models import Count
+from viewsets import ModelViewSet
 
 from django.contrib.auth.models import User
 from .models import Opportunity, Contact, Reminder, Report, Stage, CallLog, Campaign, Company, OpportunityStage
@@ -20,3 +21,5 @@ class DashboardView(TemplateView):
 
 
         
+class OpportunityViews(ModelViewSet):
+    pass

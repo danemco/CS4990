@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 import datetime
 
 # Create your models here.
@@ -60,22 +61,25 @@ class Campaign(models.Model):
         return self.name
 
 class Opportunity(models.Model):
+    name = models.CharField(max_length = 200)
+    slug = mdoels.SlugField()
     stage = models.ForeignKey(Stage)
-    company = models.ForeignKey(Company, blank = True, null = True)
     contact = models.ForeignKey(Contact)
     value = models.FloatField(help_text='How much this opportunity is worth to the organization')
-    source = models.ForeignKey(Campaign, help_text='How did this contact find out about us?')
+    source = models.ForeignKey(Campaign, help_text='How did this contact find out about us?', blank = True, null = True)
     user = models.ForeignKey(User, help_text='The user that is assigned to this opportunity')
     create_date = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        if self.company:
-            return str(self.company)
-        else:
-            return unicode(self.contact)
+            return self.name
 
     class Meta:
         verbose_name_plural = 'opportunities'
+
+    def save(self):
+        self.slug = slugify(self.name)
+        return super(Opportunity, self).save(*args, **kwargs)
+        
 
 class Reminder(models.Model):
     opportunity = models.ForeignKey(Opportunity)
