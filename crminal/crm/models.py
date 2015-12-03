@@ -62,7 +62,7 @@ class Campaign(models.Model):
 
 class Opportunity(models.Model):
     name = models.CharField(max_length = 200)
-    slug = mdoels.SlugField()
+    slug = models.SlugField()
     stage = models.ForeignKey(Stage)
     contact = models.ForeignKey(Contact)
     value = models.FloatField(help_text='How much this opportunity is worth to the organization')
@@ -76,7 +76,7 @@ class Opportunity(models.Model):
     class Meta:
         verbose_name_plural = 'opportunities'
 
-    def save(self):
+    def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         return super(Opportunity, self).save(*args, **kwargs)
         
@@ -105,6 +105,9 @@ class CallLog(models.Model):
 
     def __unicode__(self):
         return self.opportunity + " on " + self.date.strftime("%Y-%m-%d") + " by " + self.user.get_full_name() 
+
+    class Meta:
+        ordering = ['-date','user']
 
 class OpportunityStage(models.Model):
     opportunity = models.ForeignKey(Opportunity)
