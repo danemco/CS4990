@@ -22,7 +22,7 @@ from django.views.generic import TemplateView
 urlpatterns = [
     url(r'^', include('crm.urls', namespace="crm")),
     url(r'^dashboard.html', TemplateView.as_view(template_name = 'dashboard.html')),
-    url(r'^opportunity.html', TemplateView.as_view(template_name = 'opportunity.html')),
+    url(r'^opportunity/', TemplateView.as_view(template_name = 'opportunity.html')),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^admin/', include(admin.site.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
