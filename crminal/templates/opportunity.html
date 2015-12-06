@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}CRM Opportunity Dashboard{% endblock %}
 {% block extrascripts %}
+
 {% endblock %}
 {% block content %} 
     <div class="row">
@@ -18,9 +19,6 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     Contact Information
-                        <span class="text-right pull-right">
-                            <a href="#" class="btn btn-primary btn-sm mdi-action-list" style="margin-top: -7px;" title="List all Opportunities"></a>
-                        </span>
                 </div>
                 <div class="panel-body">
                 <table class="table">
@@ -30,15 +28,15 @@
                     </tr>
                     <tr>
                         <td>Address</td>
-                        <td>123 Main St</td>
+                        <td>225 S 700 E</td>
                     </tr>
                     <tr>
                         <td>City</td>
-                        <td>Testville</td>
+                        <td>St George</td>
                     </tr>
                     <tr>
                         <td>State, Zip</td>
-                        <td>TV, 90210</td>
+                        <td>UT, 84770</td>
                     </tr>
                     <tr>
                         <td>Phone</td>
@@ -50,7 +48,7 @@
                     </tr>
                 </table>
                     <div class="pull-right">
-                    <a href="#" class="btn btn-primary btn-fab btn-raised mdi-content-add-box text-right" title="Create New Reminder"></a>
+                    <a href="#" class="btn btn-primary btn-fab btn-raised mdi-content-create text-right" title="Create New Reminder"></a>
                     </div>
                 </div>
             </div>
@@ -64,7 +62,35 @@
                         </span>
                 </div>
                 <div class="panel-body">
-    <center><iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d12727.790476754675!2d-113.56689800000001!3d37.10636435!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1449102801101" width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe></center>
+    <center><div id="map" style="width: auto; height: 300px;"></div></center>
+<script>
+var map;
+function initMap() {
+    address = '225 S 700 E, St George, UT 84770';
+
+    var geocoder  = new google.maps.Geocoder();
+
+    geocoder.geocode({ 'address': address}, function(results, status) {
+        var c = results[0].geometry.location;
+        latitude  = c.lat();
+        longitude = c.lng();
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: latitude, lng: longitude},
+            scrollwheel: false,
+            zoom: 14,
+        });
+
+        var marker = new google.maps.Marker({
+            map: map,
+            position: {lat: latitude, lng: longitude},
+            title: 'Opportunity Name',
+        });
+    });
+
+}
+</script>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyDxCDEfKuCyTVE-Ex43CG5PQec_Uc5CiQQ&callback=initMap" async defer></script>
                 </div>
             </div>
         </div>
